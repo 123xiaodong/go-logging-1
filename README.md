@@ -149,7 +149,7 @@ func main() {
 	if err := logging.ApplyConfigFile(config_file); err != nil {
 		panic(err.Error())
 	}
-	logger := logging.GetLogger("a.b.c")
+	logger := logging.GetLogger("module.name")
 	defer logging.Shutdown()
 	logger.Infof("message: %s %d", "Hello", 2015)
 }
