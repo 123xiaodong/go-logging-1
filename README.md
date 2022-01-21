@@ -129,7 +129,7 @@ handlers:
         backupCount: 9
         formatter: f
 loggers:
-    a.b.c:
+    module.name: # module name
         level: INFO
         handlers: [h]
 
