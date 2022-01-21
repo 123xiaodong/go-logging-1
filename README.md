@@ -117,7 +117,7 @@ formatters:
         datefmt: "%Y-%m-%d %H:%M:%S.%3n"
 handlers:
     h:
-        class: RotatingFileHandler
+        class: RotatingFileHandler # 如果是在云环境，大部分log需要输出到终端，可以使用StdoutHandler，另外还有其他取值，常用的是SocketHandler
         filepath: "./test.log"
         mode: O_APPEND
         bufferSize: 0
