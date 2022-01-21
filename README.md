@@ -110,29 +110,28 @@ Compile and run the code above, it would generate a log file "./test.log" under 
 
 Write a configuration file ```config.yml``` as the following:
 
-```go
+```yaml
 formatters:
-    f:
-        format: "%(asctime)s %(levelname)s (%(filename)s:%(lineno)d) %(name)s %(message)s"
-        datefmt: "%Y-%m-%d %H:%M:%S.%3n"
+  format:
+    format: "%(asctime)s|%(levelname)s|%(filename)s:%(lineno)d|%(name)s|%(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S.%3n"
 handlers:
-    h:
-        class: RotatingFileHandler # 如果是在云环境，大部分log需要输出到终端，可以使用StdoutHandler，另外还有其他取值，常用的是SocketHandler
-        filepath: "./test.log"
-        mode: O_APPEND
-        bufferSize: 0
-        # 30 * 1000 ms -> 30 seconds
-        bufferFlushTime: 30000
-        inputChanSize: 1
-        # 100 * 1024 * 1024 -> 100M
-        maxBytes: 104857600
-        backupCount: 9
-        formatter: f
+  handler:
+    class: RotatingFileHandler # 如果是在云环境，大部分log需要输出到终端，可以使用StdoutHandler，另外还有其他取值，常用的是SocketHandler
+    filepath: "./test.log"
+    mode: O_APPEND
+    bufferSize: 0
+    # 30 * 1000 ms -> 30 seconds
+    bufferFlushTime: 30000
+    inputChanSize: 1
+    # 100 * 1024 * 1024 -> 100M
+    maxBytes: 104857600
+    backupCount: 9
+    formatter: format
 loggers:
-    module.name: # module name
-        level: INFO
-        handlers: [h]
-
+  module.name:
+    level: INFO
+    handlers: [handler]
 ```
 
 and use it to config logging facility like:
